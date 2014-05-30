@@ -1,5 +1,5 @@
 
-package com.mmday.MMD.arc;
+package com.mmday.MMD.activities.arc;
 
 import android.view.animation.Animation;
 import android.view.animation.Transformation;

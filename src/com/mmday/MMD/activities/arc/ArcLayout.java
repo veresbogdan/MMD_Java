@@ -1,5 +1,5 @@
 
-package com.mmday.MMD.arc;
+package com.mmday.MMD.activities.arc;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,5 +1,5 @@
 
-package com.mmday.MMD;
+package com.mmday.MMD.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,13 +7,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.mmday.MMD.arc.ArcMenu;
+import com.mmday.MMD.R;
+import com.mmday.MMD.activities.arc.ArcMenu;
 
 public class MainActivity extends Activity {
 	private static final int[] ITEM_DRAWABLES = { R.drawable.composer_camera, R.drawable.composer_music,
 			R.drawable.composer_place, R.drawable.composer_sleep, R.drawable.composer_thought, R.drawable.composer_with };
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
