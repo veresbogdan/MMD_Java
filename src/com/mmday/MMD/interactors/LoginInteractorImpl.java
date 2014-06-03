@@ -1,20 +1,22 @@
 package com.mmday.MMD.interactors;
 
 import com.mmday.MMD.presenters.OnLoginFinishedListener;
-import com.mmday.MMD.rest.VolleyController;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.mmday.MMD.services.LoginService;
+import com.mmday.MMD.services.LoginServiceImpl;
 
 public class LoginInteractorImpl implements LoginInteractor {
 
-    private VolleyController volleyController = new VolleyController();
+    private LoginService loginService;
+
+    public LoginInteractorImpl() {
+        this.loginService = new LoginServiceImpl();
+    }
 
     @Override
     public void loginWithCredentials(final String username, final String password, final OnLoginFinishedListener listener) {
 //        new Handler().postDelayed(new Runnable() {
-//            @Override public void run() {
+//            @Override
+//            public void run() {
 //                boolean error = false;
 //                if (TextUtils.isEmpty(username)){
 //                    listener.onUsernameError();
@@ -29,10 +31,6 @@ public class LoginInteractorImpl implements LoginInteractor {
 //                }
 //            }
 //        }, 2000);
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("NICKNAME", username);
-        params.put("PASSWORD", password);
-
-         volleyController.sendPostRequest(new JSONObject(params));
+          loginService.loginWithCredentials(username, password);
     }
 }

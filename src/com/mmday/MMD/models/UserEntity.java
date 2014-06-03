@@ -47,4 +47,15 @@ public class UserEntity {
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", location='" + location + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }
