@@ -1,4 +1,3 @@
-
 package com.mmday.MMD.activities;
 
 import android.app.Activity;
