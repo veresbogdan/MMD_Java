@@ -1,5 +1,6 @@
 package com.mmday.MMD.services;
 
+import com.mmday.MMD.models.UserEntity;
 import com.mmday.MMD.rest.RetrofitController;
 import com.mmday.MMD.rest.UserController;
 import retrofit.Callback;
@@ -12,18 +13,20 @@ public class LoginServiceImpl implements LoginService {
     public void loginWithCredentials(String username, String password) {
         UserController userController = RetrofitController.getInstance().getRestAdapter().create(UserController.class);
 
-        Callback callback = new Callback() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(username);
+        userEntity.setPassword(password);
+
+        userController.loginWithCredentials(userEntity, new Callback<UserEntity>() {
             @Override
-            public void success(Object o, Response response) {
-                System.out.println("Logged user: " + response + " and o??: " + o);
+            public void success(UserEntity userEntity, Response response) {
+                System.out.println("Response: " + response.getStatus() + " and user: " + userEntity);
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
                 System.out.println("Error: " + retrofitError);
             }
-        };
-
-        userController.loginWithCredentials(username, password, callback);
+        });
     }
 }

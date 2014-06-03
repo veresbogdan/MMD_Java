@@ -22,7 +22,7 @@ public class RetrofitController extends Application {
 
     public RestAdapter getRestAdapter() {
         if (restAdapter == null) {
-            restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
+            restAdapter = new RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API_URL).build();
         }
 
         return restAdapter;

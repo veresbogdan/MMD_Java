@@ -1,11 +1,22 @@
 package com.mmday.MMD.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserEntity {
 
+    @SerializedName("NICKNAME")
     private String username;
+
+    @SerializedName("PASSWORD")
     private String password;
+
+    @SerializedName("EMAIL")
     private String email;
+
+    @SerializedName("LOCATION")
     private String location;
+
+    @SerializedName("TOKEN")
     private String token;
 
     public String getUsername() {
