@@ -11,7 +11,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void loginWithCredentials(String username, String password) {
-        UserController userController = RetrofitController.getInstance().getRestAdapter().create(UserController.class);
+        UserController userController = RetrofitController.create(UserController.class);
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(username);

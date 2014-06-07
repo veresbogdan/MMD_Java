@@ -27,4 +27,8 @@ public class RetrofitController extends Application {
 
         return restAdapter;
     }
+
+    public static synchronized <T> T create(java.lang.Class<T> service) {
+        return getInstance().getRestAdapter().create(service);
+    }
 }
