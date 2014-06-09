@@ -8,7 +8,7 @@ public class CategoryDetailsListEntity {
     @SerializedName("CATEGORIES")
     private Collection<CategoryDetailsEntity> categories;
 
-    public Collection<CategoryDetailsEntity> getList(){
+    public Collection<CategoryDetailsEntity> getList() {
         return categories;
     }
 }
