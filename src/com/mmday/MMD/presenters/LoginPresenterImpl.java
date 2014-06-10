@@ -14,9 +14,8 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishedListen
         this.loginInteractor = new LoginInteractorImpl();
     }
 
-    @Override public void loginWithCredentials(String username, String password) {
-        loginView.showProgress();
-        loginInteractor.loginWithCredentials(username, password, this);
+    @Override public String loginWithCredentials(String username, String password) {
+        return loginInteractor.loginWithCredentials(username, password, this);
     }
 
     @Override public void onUsernameError() {
@@ -31,5 +30,10 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishedListen
 
     @Override public void onSuccess() {
         loginView.navigateToHome();
+    }
+
+    @Override
+    public void showProgress() {
+        loginView.showProgress();
     }
 }
