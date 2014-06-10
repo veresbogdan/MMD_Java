@@ -7,8 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import com.mmday.MMD.R;
+import com.mmday.MMD.models.CategoryEntity;
 import com.mmday.MMD.presenters.LoginPresenter;
 import com.mmday.MMD.presenters.LoginPresenterImpl;
+import com.mmday.MMD.services.CategoriesService;
+import com.mmday.MMD.services.CategoriesServiceImpl;
+import com.mmday.MMD.services.ImagesService;
+import com.mmday.MMD.services.ImagesServiceImpl;
 
 public class LoginActivity extends Activity implements LoginView, View.OnClickListener {
 
@@ -26,6 +31,12 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         findViewById(R.id.button).setOnClickListener(this);
+
+//        CategoriesService service = new CategoriesServiceImpl();
+//        service.getCategories("");
+
+        ImagesService imagesService = new ImagesServiceImpl();
+        imagesService.getImagesFrom(new CategoryEntity("2"));
 
         presenter = new LoginPresenterImpl(this);
     }
