@@ -8,40 +8,28 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
 public class CategoriesServiceImpl implements CategoriesService {
+
+    //TODO: find a better way to return this value
     @Override
-    public Collection<CategoryDetailsEntity> getCategories(String token) {
-        //TODO: find a better solution to pass the token here
+    public void getCategories() {
         CategoryDetailsListController categoriesController;
         categoriesController = RetrofitController.create(CategoryDetailsListController.class);
-
-        final Collection<CategoryDetailsEntity> result;
-        result = new ArrayList<CategoryDetailsEntity>();
 
         categoriesController.getCategories(new Callback<CategoryDetailsListEntity>() {
             @Override
             public void success(CategoryDetailsListEntity categoriesEntity, Response response) {
                 System.out.println("Response: " + response.getStatus());
-                Iterator<CategoryDetailsEntity> it = categoriesEntity.getList().iterator();
-                while (it.hasNext()) {
-                    CategoryDetailsEntity category = it.next();
-                    System.out.println(category.toString());
-                }
 
-                //TODO: find a better way to return this value
-                result.addAll(categoriesEntity.getList());
+                for (CategoryDetailsEntity categoryDetailsEntity: categoriesEntity.getList()) {
+                    System.out.println(categoryDetailsEntity);
+                }
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
-                System.out.println("fuck this shit");
+                System.out.println("fuck this shit" + retrofitError.getMessage() + " resp:" + retrofitError.getResponse());
             }
         });
-
-        return result;
     }
 }
