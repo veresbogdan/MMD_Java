@@ -4,20 +4,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class CategoryEntity {
     @SerializedName("CATEGORY")
-    private String category;
+    private String name;
 
-    public String getCategory() {
-        return category;
+    public CategoryEntity(String name) {
+        this.name = name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "CategoryEntity{" +
-                "category='" + category + '\'' +
+                "name='" + name + '\'' +
                 '}';
     }
 }

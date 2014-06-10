@@ -1,7 +1,6 @@
 package com.mmday.MMD.rest;
 
 import android.app.Application;
-import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 
 public class RetrofitController extends Application {

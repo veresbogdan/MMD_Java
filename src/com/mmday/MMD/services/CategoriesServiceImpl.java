@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class CategoriesServiceImpl implements CategoriesService{
+public class CategoriesServiceImpl implements CategoriesService {
     @Override
     public Collection<CategoryDetailsEntity> getCategories(String token) {
         //TODO: find a better solution to pass the token here
@@ -27,8 +27,7 @@ public class CategoriesServiceImpl implements CategoriesService{
             public void success(CategoryDetailsListEntity categoriesEntity, Response response) {
                 System.out.println("Response: " + response.getStatus());
                 Iterator<CategoryDetailsEntity> it = categoriesEntity.getList().iterator();
-                while (it.hasNext())
-                {
+                while (it.hasNext()) {
                     CategoryDetailsEntity category = it.next();
                     System.out.println(category.toString());
                 }

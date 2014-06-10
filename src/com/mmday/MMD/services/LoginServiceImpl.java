@@ -2,8 +2,7 @@ package com.mmday.MMD.services;
 
 import com.mmday.MMD.models.UserEntity;
 import com.mmday.MMD.rest.RetrofitController;
-import com.mmday.MMD.rest.UserController;
-
+import com.mmday.MMD.rest.UserController
 public class LoginServiceImpl implements LoginService {
 
     @Override
