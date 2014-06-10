@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 	}
 
     private void setAuthToken() {
-        accountManager.getAuthTokenByFeatures(GeneralEnums.ACCOUNT_TYPE.getMessage(), GeneralEnums.AUTHTOKEN_TYPE_FULL_ACCESS.getMessage(), null, this, null, null,
+        accountManager.getAuthTokenByFeatures(GeneralEnums.ACCOUNT_TYPE.getValue(), GeneralEnums.AUTHTOKEN_TYPE_FULL_ACCESS.getValue(), null, this, null, null,
                 new AccountManagerCallback<Bundle>() {
                     @Override
                     public void run(AccountManagerFuture<Bundle> future) {

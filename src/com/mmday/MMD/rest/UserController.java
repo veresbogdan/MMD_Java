@@ -7,5 +7,5 @@ import retrofit.http.POST;
 public interface UserController {
 
     @POST("/User/Auth")
-    UserEntity loginWithCredentials (@Body UserEntity userEntity);
+    UserEntity loginWithCredentials (@Body UserEntity userEntity);        //this one is sync
 }

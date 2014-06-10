@@ -30,9 +30,9 @@ public class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle addAccount(AccountAuthenticatorResponse accountAuthenticatorResponse, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws NetworkErrorException {
         final Intent intent = new Intent(mContext, LoginActivity.class);
-        intent.putExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getMessage(), accountType);
-        intent.putExtra(GeneralEnums.ARG_AUTH_TYPE.getMessage(), authTokenType);
-        intent.putExtra(GeneralEnums.ARG_IS_ADDING_NEW_ACCOUNT.getMessage(), true);
+        intent.putExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getValue(), accountType);
+        intent.putExtra(GeneralEnums.ARG_AUTH_TYPE.getValue(), authTokenType);
+        intent.putExtra(GeneralEnums.ARG_IS_ADDING_NEW_ACCOUNT.getValue(), true);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, accountAuthenticatorResponse);
 
         final Bundle bundle = new Bundle();
@@ -81,9 +81,9 @@ public class Authenticator extends AbstractAccountAuthenticator {
         // an intent to display our AuthenticatorActivity.
         final Intent intent = new Intent(mContext, LoginActivity.class);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, accountAuthenticatorResponse);
-        intent.putExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getMessage(), account.type);
-        intent.putExtra(GeneralEnums.ARG_AUTH_TYPE.getMessage(), authTokenType);
-        intent.putExtra(GeneralEnums.ARG_ACCOUNT_NAME.getMessage(), account.name);
+        intent.putExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getValue(), account.type);
+        intent.putExtra(GeneralEnums.ARG_AUTH_TYPE.getValue(), authTokenType);
+        intent.putExtra(GeneralEnums.ARG_ACCOUNT_NAME.getValue(), account.name);
         final Bundle bundle = new Bundle();
         bundle.putParcelable(AccountManager.KEY_INTENT, intent);
 

@@ -6,15 +6,16 @@ public enum GeneralEnums {
     ARG_IS_ADDING_NEW_ACCOUNT("IS_ADDING_ACCOUNT"),
     AUTHTOKEN_TYPE_FULL_ACCESS("Full access"),
     ARG_ACCOUNT_TYPE("ACCOUNT_TYPE"),
-    ACCOUNT_TYPE("com.mmday.MMD");
+    ACCOUNT_TYPE("com.mmday.MMD"),
+    API_URL_ENDPOINT("http://cloud.mm-day.com");
 
-    private final String message;
+    private final String value;
 
-    GeneralEnums(String message) {
-        this.message = message;
+    GeneralEnums(String value) {
+        this.value = value;
     }
 
-    public String getMessage() {
-        return message;
+    public String getValue() {
+        return value;
     }
 }

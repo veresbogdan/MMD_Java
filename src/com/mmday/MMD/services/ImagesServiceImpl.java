@@ -9,18 +9,18 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ImagesServiceImpl implements ImagesService {
-    Collection<ImageEntity> m_images;
+    List<ImageEntity> m_images;
 
     public ImagesServiceImpl() {
         m_images = new ArrayList<ImageEntity>();
     }
 
+    //TODO: find a better way to return this value
     @Override
-    public Collection<ImageEntity> getImagesFrom(CategoryEntity categoryEntity) {
+    public void getImages(CategoryEntity categoryEntity) {
         ImageDetailsListController imagesController = RetrofitController.create(ImageDetailsListController.class);
 
         imagesController.getImages(categoryEntity, new Callback<List<ImageEntity>>() {
@@ -28,8 +28,6 @@ public class ImagesServiceImpl implements ImagesService {
             public void success(List<ImageEntity> images, Response response) {
                 System.out.println("Images service response: " + response.getStatus());
                 System.out.println("images: " + images);
-                //TODO: find a better way to return this value
-                m_images.addAll(images);
             }
 
             @Override
@@ -37,6 +35,5 @@ public class ImagesServiceImpl implements ImagesService {
                 System.out.println("ImagesService says: fuck this shit");
             }
         });
-        return m_images;
     }
 }

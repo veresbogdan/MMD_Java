@@ -1,6 +1,7 @@
 package com.mmday.MMD.rest;
 
 import android.app.Application;
+import com.mmday.MMD.models.GeneralEnums;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 
@@ -9,7 +10,6 @@ public class RetrofitController extends Application {
 
     private RestAdapter restAdapter;
     private RequestInterceptor requestInterceptor;
-    private static final String API_URL = "http://cloud.mm-day.com";
 
     private String authToken = null;
 
@@ -35,7 +35,7 @@ public class RetrofitController extends Application {
 
     public RestAdapter getRestAdapter() {
         if (restAdapter == null) {
-            restAdapter = new RestAdapter.Builder().setRequestInterceptor(requestInterceptor).setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(API_URL).build();
+            restAdapter = new RestAdapter.Builder().setRequestInterceptor(requestInterceptor).setLogLevel(RestAdapter.LogLevel.FULL).setEndpoint(GeneralEnums.API_URL_ENDPOINT.getValue()).build();
         }
 
         return restAdapter;

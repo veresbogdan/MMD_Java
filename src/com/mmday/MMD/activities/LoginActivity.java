@@ -34,9 +34,9 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Login
         setContentView(R.layout.activity_login);
         accountManager = AccountManager.get(getBaseContext());
 
-        mAuthTokenType = getIntent().getStringExtra(GeneralEnums.ARG_AUTH_TYPE.getMessage());
+        mAuthTokenType = getIntent().getStringExtra(GeneralEnums.ARG_AUTH_TYPE.getValue());
         if (mAuthTokenType == null) {
-            mAuthTokenType = GeneralEnums.AUTHTOKEN_TYPE_FULL_ACCESS.getMessage();
+            mAuthTokenType = GeneralEnums.AUTHTOKEN_TYPE_FULL_ACCESS.getValue();
         }
 
         progressBar = (ProgressBar) findViewById(R.id.progress);
@@ -69,7 +69,7 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Login
     }
 
     @Override public void onClick(View v) {
-        final String accountType = getIntent().getStringExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getMessage());
+        final String accountType = getIntent().getStringExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getValue());
         presenter.showProgress();
 
         new AsyncTask<String, Void, Intent>() {
@@ -110,7 +110,7 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Login
         String accountPassword = intent.getStringExtra(PARAM_USER_PASS);
         final Account account = new Account(accountName, intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE));
 
-        if (getIntent().getBooleanExtra(GeneralEnums.ARG_IS_ADDING_NEW_ACCOUNT.getMessage(), false)) {
+        if (getIntent().getBooleanExtra(GeneralEnums.ARG_IS_ADDING_NEW_ACCOUNT.getValue(), false)) {
             String authToken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN);
             String authTokenType = mAuthTokenType;
 
