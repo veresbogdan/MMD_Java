@@ -2,7 +2,7 @@ package com.mmday.MMD.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserEntity {
+public class UserDto extends BaseDto{
 
     @SerializedName("NICKNAME")
     private String username;

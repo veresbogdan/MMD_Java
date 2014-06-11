@@ -1,21 +1,24 @@
 package com.mmday.MMD.services;
 
-import com.mmday.MMD.models.UserEntity;
+import com.mmday.MMD.models.UserDto;
 import com.mmday.MMD.rest.RetrofitController;
 import com.mmday.MMD.rest.UserController;
 public class LoginServiceImpl implements LoginService {
 
+    private static  UserController userController;
+
+    public LoginServiceImpl() {
+        userController = RetrofitController.create(UserController.class);
+    }
+
     @Override
     public String loginWithCredentials(String username, String password) {
-        UserController userController = RetrofitController.create(UserController.class);
+        UserDto userDto = new UserDto();
+        userDto.setUsername(username);
+        userDto.setPassword(password);
 
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(username);
-        userEntity.setPassword(password);
+        userDto = userController.loginWithCredentials(userDto);
 
-        userEntity = userController.loginWithCredentials(userEntity);
-
-        return userEntity.getToken();
-
+        return userDto.getToken();
     }
 }

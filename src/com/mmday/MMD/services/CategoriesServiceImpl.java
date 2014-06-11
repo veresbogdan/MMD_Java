@@ -10,12 +10,15 @@ import retrofit.client.Response;
 
 public class CategoriesServiceImpl implements CategoriesService {
 
+    private static CategoryDetailsListController categoriesController;
+
+    public CategoriesServiceImpl() {
+        categoriesController = RetrofitController.create(CategoryDetailsListController.class);
+    }
+
     //TODO: find a better way to return this value
     @Override
     public void getCategories() {
-        CategoryDetailsListController categoriesController;
-        categoriesController = RetrofitController.create(CategoryDetailsListController.class);
-
         categoriesController.getCategories(new Callback<CategoryDetailsListEntity>() {
             @Override
             public void success(CategoryDetailsListEntity categoriesEntity, Response response) {
