@@ -1,11 +1,11 @@
 package com.mmday.MMD.rest;
 
-import com.mmday.MMD.models.UserEntity;
+import com.mmday.MMD.models.UserDto;
 import retrofit.http.Body;
 import retrofit.http.POST;
 
 public interface UserController {
 
     @POST("/User/Auth")
-    UserEntity loginWithCredentials (@Body UserEntity userEntity);        //this one is sync
+    UserDto loginWithCredentials (@Body UserDto userDto);        //this one is sync
 }

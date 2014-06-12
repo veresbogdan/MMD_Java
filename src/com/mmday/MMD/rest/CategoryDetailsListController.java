@@ -5,6 +5,7 @@ import retrofit.Callback;
 import retrofit.http.GET;
 
 public interface CategoryDetailsListController {
+
     @GET("/Fun/Imagini/Categories")
     void getCategories(Callback<CategoryDetailsListEntity> callback);
 }

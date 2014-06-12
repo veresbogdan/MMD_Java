@@ -2,11 +2,11 @@ package com.mmday.MMD.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CategoryEntity {
+public class CategoryDto extends BaseDto{
     @SerializedName("CATEGORY")
     private String name;
 
-    public CategoryEntity(String name) {
+    public CategoryDto(String name) {
         this.name = name;
     }
 
