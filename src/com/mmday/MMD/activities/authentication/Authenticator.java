@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import com.mmday.MMD.activities.LoginActivity;
+import com.mmday.MMD.activities.AuthenticationChooserActivity;
 import com.mmday.MMD.models.GeneralEnums;
 import com.mmday.MMD.services.LoginService;
 import com.mmday.MMD.services.LoginServiceImpl;
@@ -29,7 +29,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle addAccount(AccountAuthenticatorResponse accountAuthenticatorResponse, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws NetworkErrorException {
-        final Intent intent = new Intent(mContext, LoginActivity.class);
+        final Intent intent = new Intent(mContext, AuthenticationChooserActivity.class);
         intent.putExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getValue(), accountType);
         intent.putExtra(GeneralEnums.ARG_AUTH_TYPE.getValue(), authTokenType);
         intent.putExtra(GeneralEnums.ARG_IS_ADDING_NEW_ACCOUNT.getValue(), true);
@@ -79,7 +79,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
         // If we get here, then we couldn't access the user's password - so we
         // need to re-prompt them for their credentials. We do that by creating
         // an intent to display our AuthenticatorActivity.
-        final Intent intent = new Intent(mContext, LoginActivity.class);
+        final Intent intent = new Intent(mContext, AuthenticationChooserActivity.class);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, accountAuthenticatorResponse);
         intent.putExtra(GeneralEnums.ARG_ACCOUNT_TYPE.getValue(), account.type);
         intent.putExtra(GeneralEnums.ARG_AUTH_TYPE.getValue(), authTokenType);

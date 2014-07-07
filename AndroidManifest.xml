@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.AuthenticationChooserActivity"/>
+        <activity android:name=".activities.SignUpActivity"/>
 
         <service android:name=".activities.authentication.AuthenticatorBinder">
             <intent-filter>
