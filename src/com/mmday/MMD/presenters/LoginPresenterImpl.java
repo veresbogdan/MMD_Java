@@ -14,12 +14,12 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishedListen
         this.loginInteractor = new LoginInteractorImpl();
     }
 
-    @Override public String loginWithCredentials(String username, String password) {
-        return loginInteractor.loginWithCredentials(username, password, this);
+    @Override public String loginWithCredentials(String email, String password) {
+        return loginInteractor.loginWithCredentials(email, password, this);
     }
 
-    @Override public void onUsernameError() {
-        loginView.setUsernameError();
+    @Override public void onEmailError() {
+        loginView.setEmailError();
         loginView.hideProgress();
     }
 

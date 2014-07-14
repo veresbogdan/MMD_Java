@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserDto extends BaseDto{
 
-    @SerializedName("NICKNAME")
+    @SerializedName("nickname")
     private String username;
 
-    @SerializedName("PASSWORD")
+    @SerializedName("password")
     private String password;
 
-    @SerializedName("EMAIL")
+    @SerializedName("email")
     private String email;
 
-    @SerializedName("LOCATION")
+    @SerializedName("location")
     private String location;
 
     @SerializedName("TOKEN")

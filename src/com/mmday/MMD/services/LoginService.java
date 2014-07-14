@@ -1,7 +1,10 @@
 package com.mmday.MMD.services;
 
+import com.mmday.MMD.models.UserDto;
+
 public interface LoginService {
 
-    public String loginWithCredentials(String username, String password);
+    public UserDto loginWithCredentials(String email, String password);
 
+    public UserDto signUpWithCredentials(String username, String password, String email, String location);
 }
