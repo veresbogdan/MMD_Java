@@ -2,7 +2,7 @@ package com.mmday.MMD.presenters;
 
 public interface OnLoginFinishedListener {
 
-    public void onUsernameError();
+    public void onEmailError();
 
     public void onPasswordError();
 

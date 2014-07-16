@@ -60,7 +60,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
             if (password != null) {
                 try {
                     //authToken = sServerAuthenticate.userSignIn(account.name, password, authTokenType);
-                    authToken = loginService.loginWithCredentials(account.name, password);
+                    authToken = loginService.loginWithCredentials(account.name, password).getToken();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

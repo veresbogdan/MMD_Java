@@ -7,7 +7,8 @@ public enum GeneralEnums {
     AUTHTOKEN_TYPE_FULL_ACCESS("Full access"),
     ARG_ACCOUNT_TYPE("ACCOUNT_TYPE"),
     ACCOUNT_TYPE("com.mmday.MMD"),
-    API_URL_ENDPOINT("http://cloud.mm-day.com");
+    PARAM_USER_PASS("USER_PASS"),
+    API_URL_ENDPOINT("http://api.mm-day.com");
 
     private final String value;
 
