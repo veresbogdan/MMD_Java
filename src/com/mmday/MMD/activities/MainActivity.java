@@ -4,34 +4,38 @@ import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 import com.mmday.MMD.R;
 import com.mmday.MMD.activities.arc.ArcMenu;
+import com.mmday.MMD.models.CategoryDto;
 import com.mmday.MMD.models.GeneralEnums;
+import com.mmday.MMD.presenters.CategoriesPresenter;
+import com.mmday.MMD.presenters.CategoriesPresenterImpl;
 import com.mmday.MMD.rest.RetrofitController;
 
-public class MainActivity extends Activity {
-	private static final int[] ITEM_DRAWABLES = { R.drawable.composer_camera, R.drawable.composer_music,
-			R.drawable.composer_place, R.drawable.composer_sleep, R.drawable.composer_thought, R.drawable.composer_with };
+import java.util.List;
 
+public class MainActivity extends Activity implements MainView, CategoryClickHandler {
     private static AccountManager accountManager;
+    private ArcMenu arcMenu;
+    private CategoriesPresenter presenter;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         accountManager = AccountManager.get(this);
 
         setAuthToken();
 
-		setContentView(R.layout.main);
-		ArcMenu arcMenu = (ArcMenu) findViewById(R.id.arc_menu);
+        setContentView(R.layout.main);
+        this.arcMenu = (ArcMenu) findViewById(R.id.arc_menu);
 
-        initArcMenu(arcMenu, ITEM_DRAWABLES);
-	}
+        this.presenter = new CategoriesPresenterImpl(this);
+        this.presenter.load();
+    }
 
     private void setAuthToken() {
         accountManager.getAuthTokenByFeatures(GeneralEnums.ACCOUNT_TYPE.getValue(), GeneralEnums.AUTHTOKEN_TYPE_FULL_ACCESS.getValue(), null, this, null, null,
@@ -50,20 +54,50 @@ public class MainActivity extends Activity {
                 , null);
     }
 
-    private void initArcMenu(ArcMenu menu, int[] itemDrawables) {
-        final int itemCount = itemDrawables.length;
-        for (int i = 0; i < itemCount; i++) {
-            ImageView item = new ImageView(this);
-            item.setImageResource(itemDrawables[i]);
+    @Override
+    public void showProgress() {
+        this.arcMenu.setVisibility(View.INVISIBLE);
+    }
 
-            final int position = i;
-            menu.addItem(item, new OnClickListener() {
+    @Override
+    public void hideProgress() {
+        this.arcMenu.setVisibility(View.VISIBLE);
+    }
 
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
-                }
-            });
+    @Override
+    public void setCategories(List<CategoryDto> categories) {
+        //TODO : call the addArcMenuItem method with random values
+        int r = 0;
+        for (CategoryDto category : categories) {
+            addArcMenuItem(category,
+                    r++ % 3 == 0 ? R.drawable.mm_20 : r++ % 2 == 0 ? R.drawable.mm_36 : R.drawable.mm_30,
+                    r++ % 3 == 1 ? 1.2f : r % 2 == 0 ? 1.0f : 0.9f);
         }
+    }
+
+    private void addArcMenuItem(CategoryDto categoryDto, int resource, float scale) {
+        //TODO : instead of a simple ImageView, here we need a composite object that has
+        //an image and a textView in order to show the category name / notifications maybe
+        ImageView item = new ImageView(this);
+        item.setImageResource(resource);
+
+        item.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        item.setScaleX(scale);
+        item.setScaleY(scale);
+
+        this.arcMenu.addItem(item, new CategoryClickListener(categoryDto, this));
+    }
+
+    @Override
+
+    public void onClick(CategoryDto categoryDto) {
+        goToCategory(categoryDto.getId().toString());
+    }
+
+    private void goToCategory(String categoryId) {
+        Intent intent = new Intent(getApplicationContext(), ImagesActivity.class);
+        intent.putExtra(GeneralEnums.PARAM_CATEGORY_ID.getValue(), categoryId);
+
+        startActivity(intent);
     }
 }

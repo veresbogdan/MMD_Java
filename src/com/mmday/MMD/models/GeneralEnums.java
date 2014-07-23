@@ -8,7 +8,10 @@ public enum GeneralEnums {
     ARG_ACCOUNT_TYPE("ACCOUNT_TYPE"),
     ACCOUNT_TYPE("com.mmday.MMD"),
     PARAM_USER_PASS("USER_PASS"),
-    API_URL_ENDPOINT("http://api.mm-day.com");
+    API_URL_ENDPOINT("http://api.mm-day.com"),
+
+    PARAM_CATEGORY_ID("categoryId"),
+    PARAM_IMAGE_ID("imageId");
 
     private final String value;
 

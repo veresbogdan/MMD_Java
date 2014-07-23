@@ -13,6 +13,14 @@ public class RetrofitController extends Application {
 
     private String authToken = null;
 
+    public static synchronized RetrofitController getInstance() {
+        return retrofitController;
+    }
+
+    public static synchronized <T> T create(java.lang.Class<T> service) {
+        return getInstance().getRestAdapter().create(service);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,14 +31,10 @@ public class RetrofitController extends Application {
             @Override
             public void intercept(final RequestFacade requestFacade) {
                 if (authToken != null) {
-                    requestFacade.addHeader("AUTH_TOKEN", authToken);
+                    requestFacade.addHeader("TOKEN", authToken);
                 }
             }
         };
-    }
-
-    public static synchronized RetrofitController getInstance() {
-        return retrofitController;
     }
 
     public RestAdapter getRestAdapter() {
@@ -39,10 +43,6 @@ public class RetrofitController extends Application {
         }
 
         return restAdapter;
-    }
-
-    public static synchronized <T> T create(java.lang.Class<T> service) {
-        return getInstance().getRestAdapter().create(service);
     }
 
     public void setAuthToken(String authToken) {

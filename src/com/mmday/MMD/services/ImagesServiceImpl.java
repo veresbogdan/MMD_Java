@@ -1,8 +1,8 @@
 package com.mmday.MMD.services;
 
-import com.mmday.MMD.models.CategoryDto;
 import com.mmday.MMD.models.ImageDto;
-import com.mmday.MMD.rest.ImageDetailsListController;
+import com.mmday.MMD.presenters.OnFinishedListener;
+import com.mmday.MMD.rest.ImagesController;
 import com.mmday.MMD.rest.RetrofitController;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -12,29 +12,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImagesServiceImpl implements ImagesService {
-    private static ImageDetailsListController imageDetailsListController;
-
-    List<ImageDto> m_images;
+    private static ImagesController imagesController;
+    private final List<ImageDto> images = new ArrayList<ImageDto>();
 
     public ImagesServiceImpl() {
-        imageDetailsListController = RetrofitController.create(ImageDetailsListController.class);
-        m_images = new ArrayList<ImageDto>();
+        imagesController = RetrofitController.create(ImagesController.class);
     }
 
-    //TODO: find a better way to return this value
     @Override
-    public void getImages(CategoryDto categoryDto) {
-        imageDetailsListController.getImages(categoryDto, new Callback<List<ImageDto>>() {
+    public void loadImages(String categoryId, final OnFinishedListener onFinishedListener) {
+        //TODO maybe pass the listener as param on the constructor
+        this.images.clear();
+
+        imagesController.getImages(categoryId, new Callback<List<ImageDto>>() {
             @Override
-            public void success(List<ImageDto> images, Response response) {
+            public void success(List<ImageDto> receivedImages, Response response) {
                 System.out.println("Images service response: " + response.getStatus());
-                System.out.println("images: " + images);
+
+                images.addAll(receivedImages);
+                onFinishedListener.onSuccess();
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
                 System.out.println("ImagesService says: fuck this shit");
+                onFinishedListener.onError();
             }
         });
+    }
+
+    @Override
+    public List<ImageDto> getImages() {
+        return this.images;
     }
 }
