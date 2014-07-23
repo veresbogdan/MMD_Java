@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import com.facebook.LoggingBehavior;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.Settings;
 import com.mmday.MMD.R;
 import com.mmday.MMD.models.GeneralEnums;
 
@@ -15,12 +19,16 @@ public class AuthenticationChooserActivity extends AccountAuthenticatorActivity 
 
     private Button signIn;
     private Button signUp;
+    private Button fbSignIn;
     private String mAuthTokenType;
     private AccountManager accountManager;
+
+    private Session.StatusCallback statusCallback = new SessionStatusCallback();
 
     private final int REQ_SIGN_IN = 1;
     private final int REQ_SIGN_UP = 2;
 
+    //TODO Modularize this + remove unnecessary code from FB part
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,35 @@ public class AuthenticationChooserActivity extends AccountAuthenticatorActivity 
         signIn.setOnClickListener(this);
         signUp = (Button) findViewById(R.id.SignUpButton);
         signUp.setOnClickListener(this);
+        fbSignIn = (Button) findViewById(R.id.FbSignInButton);
+        fbSignIn.setOnClickListener(this);
+
+        Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        Session session = Session.getActiveSession();
+        if (session == null) {
+            if (savedInstanceState != null) {
+                session = Session.restoreSession(this, null, statusCallback, savedInstanceState);
+            }
+            if (session == null) {
+                session = new Session(this);
+            }
+            Session.setActiveSession(session);
+            if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
+                session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
+            }
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Session.getActiveSession().addCallback(statusCallback);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Session.getActiveSession().removeCallback(statusCallback);
     }
 
     @Override
@@ -56,14 +93,42 @@ public class AuthenticationChooserActivity extends AccountAuthenticatorActivity 
 
             startActivityForResult(intent, REQ_SIGN_UP);
         }
+        if (view == fbSignIn) {
+            Session session = Session.getActiveSession();
+            if (!session.isOpened() && !session.isClosed()) {
+                session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
+            } else {
+                Session.openActiveSession(this, true, statusCallback);
+            }
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if ((requestCode == REQ_SIGN_IN || requestCode == REQ_SIGN_UP)&& resultCode == RESULT_OK) {
-            finishLogin(intent);
-        } else
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQ_SIGN_IN || requestCode == REQ_SIGN_UP) {
+                finishLogin(intent);
+            } else {
+                Session.getActiveSession().onActivityResult(this, requestCode, resultCode, intent);
+            }
+        } else {
             super.onActivityResult(requestCode, resultCode, intent);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Session session = Session.getActiveSession();
+        Session.saveSession(session, outState);
+    }
+
+    private void updateView() {
+        Session session = Session.getActiveSession();
+        //TODO Finish here
+        if (session.isOpened()) {
+            System.out.println("Result: " + session.getAccessToken());
+        }
     }
 
     private void finishLogin(Intent intent) {
@@ -86,5 +151,12 @@ public class AuthenticationChooserActivity extends AccountAuthenticatorActivity 
         setAccountAuthenticatorResult(intent.getExtras());
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private class SessionStatusCallback implements Session.StatusCallback {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            updateView();
+        }
     }
 }

@@ -15,5 +15,6 @@
     <string name="email_hint">email</string>
     <string name="email_error">Email cannot be empty</string>
     <string name="sign_up">Sign Up</string>
+    <string name="fb_app_id">635793476502695</string>
 
 </resources>
