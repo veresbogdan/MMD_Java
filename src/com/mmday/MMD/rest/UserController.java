@@ -5,6 +5,8 @@ import retrofit.http.Body;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 
+import java.util.Map;
+
 public interface UserController {
 
     @POST("/login")
@@ -12,4 +14,7 @@ public interface UserController {
 
     @PUT("/user")
     UserDto signUpWithCredentials (@Body UserDto userDto);        //sync also
+
+    @POST("/login/fb")
+    UserDto loginWithFacebook (@Body Map<String, String> fbLogin);
 }

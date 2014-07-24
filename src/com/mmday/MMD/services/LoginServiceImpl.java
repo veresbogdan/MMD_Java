@@ -3,6 +3,10 @@ package com.mmday.MMD.services;
 import com.mmday.MMD.models.UserDto;
 import com.mmday.MMD.rest.RetrofitController;
 import com.mmday.MMD.rest.UserController;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginServiceImpl implements LoginService {
 
     private static UserController userController;
@@ -33,5 +37,14 @@ public class LoginServiceImpl implements LoginService {
         userDto = userController.signUpWithCredentials(userDto);
 
         return userDto;
+    }
+
+    @Override
+    public UserDto loginWithFacebook(String fbToken, String fbUserId) {
+        Map<String, String> fbLoginDto = new HashMap<>();
+        fbLoginDto.put("token", fbToken);
+        fbLoginDto.put("user_id", fbUserId);
+
+        return userController.loginWithFacebook(fbLoginDto);
     }
 }
