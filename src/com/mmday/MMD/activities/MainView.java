@@ -4,13 +4,10 @@ import com.mmday.MMD.models.CategoryDto;
 
 import java.util.List;
 
-/**
- * Created by albert on 20.07.2014.
- */
 public interface MainView {
-    void showProgress();
+    public void showProgress();
 
-    void hideProgress();
+    public void hideProgress();
 
-    void setCategories(List<CategoryDto> categories);
+    public void setCategories(List<CategoryDto> categories);
 }

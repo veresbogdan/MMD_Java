@@ -8,7 +8,6 @@ import retrofit.http.Path;
 import java.util.List;
 
 public interface ImagesController {
-
     //TODO instead of string category id, maybe we should use directly the long type
     //in this way we don't have to convert it to a string
     @GET("/images/categories/{id}")

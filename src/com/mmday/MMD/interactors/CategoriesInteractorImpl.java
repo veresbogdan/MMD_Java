@@ -7,25 +7,22 @@ import com.mmday.MMD.services.CategoriesServiceImpl;
 
 import java.util.List;
 
-/**
- * Created by albert on 20.07.2014.
- */
 public class CategoriesInteractorImpl implements CategoriesInteractor {
     private final OnFinishedListener onFinishedListener;
     private CategoriesService categoriesService;
 
     public CategoriesInteractorImpl(OnFinishedListener listener) {
-        this.categoriesService = new CategoriesServiceImpl();
-        this.onFinishedListener = listener;
+        categoriesService = new CategoriesServiceImpl();
+        onFinishedListener = listener;
     }
 
     @Override
     public void load() {
-        this.categoriesService.loadCategories(this.onFinishedListener);
+        categoriesService.loadCategories(onFinishedListener);
     }
 
     @Override
     public List<CategoryDto> getCategories() {
-        return this.categoriesService.getCategories();
+        return categoriesService.getCategories();
     }
 }

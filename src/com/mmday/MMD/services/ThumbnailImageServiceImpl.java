@@ -11,21 +11,18 @@ import retrofit.client.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by albert on 20.07.2014.
- */
 public class ThumbnailImageServiceImpl implements ThumbnailImageService {
     private final ThumbnailImageController thumbsController;
     private final List<ContactsContract.CommonDataKinds.Photo> photoList = new ArrayList<ContactsContract.CommonDataKinds.Photo>();
 
     public ThumbnailImageServiceImpl() {
-        this.thumbsController = RetrofitController.create(ThumbnailImageController.class);
+        thumbsController = RetrofitController.create(ThumbnailImageController.class);
     }
 
     @Override
     public void load(String imageId, final OnFinishedListener listener) {
-        this.photoList.clear();
-        this.thumbsController.getImage(imageId, new Callback<ContactsContract.CommonDataKinds.Photo>() {
+        photoList.clear();
+        thumbsController.getImage(imageId, new Callback<ContactsContract.CommonDataKinds.Photo>() {
             @Override
             public void success(ContactsContract.CommonDataKinds.Photo receivedPhoto, Response response) {
                 photoList.add(receivedPhoto);
@@ -41,6 +38,6 @@ public class ThumbnailImageServiceImpl implements ThumbnailImageService {
 
     @Override
     public ContactsContract.CommonDataKinds.Photo getThumbnail() {
-        return this.photoList.get(0);
+        return photoList.get(0);
     }
 }

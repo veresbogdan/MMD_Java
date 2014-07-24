@@ -22,7 +22,7 @@ public class ImagesServiceImpl implements ImagesService {
     @Override
     public void loadImages(String categoryId, final OnFinishedListener onFinishedListener) {
         //TODO maybe pass the listener as param on the constructor
-        this.images.clear();
+        images.clear();
 
         imagesController.getImages(categoryId, new Callback<List<ImageDto>>() {
             @Override
@@ -43,6 +43,6 @@ public class ImagesServiceImpl implements ImagesService {
 
     @Override
     public List<ImageDto> getImages() {
-        return this.images;
+        return images;
     }
 }

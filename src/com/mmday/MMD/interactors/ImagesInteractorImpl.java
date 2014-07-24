@@ -11,18 +11,18 @@ public class ImagesInteractorImpl implements ImagesInteractor {
     private final OnFinishedListener listener;
     private ImagesService imagesService;
 
-    public ImagesInteractorImpl(OnFinishedListener listener) {
-        this.listener = listener;
-        this.imagesService = new ImagesServiceImpl();
+    public ImagesInteractorImpl(OnFinishedListener onFinishedListener) {
+        listener = onFinishedListener;
+        imagesService = new ImagesServiceImpl();
     }
 
     @Override
     public void load(String categoryId) {
-        this.imagesService.loadImages(categoryId, this.listener);
+        imagesService.loadImages(categoryId, this.listener);
     }
 
     @Override
     public List<ImageDto> getImages() {
-        return this.imagesService.getImages();
+        return imagesService.getImages();
     }
 }

@@ -9,5 +9,5 @@ public interface ImagesService {
 
     public void loadImages(String categoryId, OnFinishedListener onFinishedListener);
 
-    List<ImageDto> getImages();
+    public List<ImageDto> getImages();
 }

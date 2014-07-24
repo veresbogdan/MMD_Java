@@ -38,8 +38,8 @@ public class ImagesActivity extends Activity implements ImagesView {
 
         Intent intent = getIntent();
         String categoryId = intent.getStringExtra(GeneralEnums.PARAM_CATEGORY_ID.getValue());
-        this.presenter = new ImagesPresenterImpl(this, categoryId);
-        this.presenter.load();
+        presenter = new ImagesPresenterImpl(this, categoryId);
+        presenter.load();
     }
 
     @Override
@@ -48,8 +48,8 @@ public class ImagesActivity extends Activity implements ImagesView {
         //if it already was created/started once?
         final ListView listview = (ListView) findViewById(R.id.listview);
 
-        this.images.clear();
-        this.images.addAll(imagesList);
+        images.clear();
+        images.addAll(imagesList);
 
         final CustomListAdapter adapter = new CustomListAdapter(this, imagesList);
         listview.setAdapter(adapter);

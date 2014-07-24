@@ -14,9 +14,6 @@ import com.mmday.MMD.services.ThumbnailImageServiceImpl;
 
 import java.util.List;
 
-/**
- * Created by albert on 20.07.2014.
- */
 public class CustomListAdapter extends ArrayAdapter<ImageDto> {
     private final Context context;
     private final List<ImageDto> categories;
@@ -25,20 +22,19 @@ public class CustomListAdapter extends ArrayAdapter<ImageDto> {
     public CustomListAdapter(Context context, List<ImageDto> values) {
         super(context, R.layout.image_item_layout, values);
         this.context = context;
-        this.categories = values;
-        this.thumbnailService = new ThumbnailImageServiceImpl();
+        categories = values;
+        thumbnailService = new ThumbnailImageServiceImpl();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.image_item_layout, parent, false);
         TextView firstRow = (TextView) rowView.findViewById(R.id.firstLine);
         TextView secondRow = (TextView) rowView.findViewById(R.id.secondLine);
 
-        ImageDto current = this.categories.get(position);
+        ImageDto current = categories.get(position);
         firstRow.setText(current.getId().toString());
         secondRow.setText(current.getCategoryId().toString());
 

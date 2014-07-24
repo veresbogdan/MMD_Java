@@ -1,5 +1,5 @@
 package com.mmday.MMD.presenters;
 
 public interface CategoriesPresenter {
-    void load();
+    public void load();
 }

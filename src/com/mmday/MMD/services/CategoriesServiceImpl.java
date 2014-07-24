@@ -17,7 +17,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     private final List<CategoryDto> categories = new ArrayList<CategoryDto>();
 
     public CategoriesServiceImpl() {
-        this.categoriesController = RetrofitController.create(CategoriesController.class);
+        categoriesController = RetrofitController.create(CategoriesController.class);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 
         categories.clear();
 
-        this.categoriesController.getCategories(new Callback<List<CategoryDto>>() {
+        categoriesController.getCategories(new Callback<List<CategoryDto>>() {
             @Override
             public void success(List<CategoryDto> categoriesResp, Response response) {
                 System.out.println("Response: " + response.getStatus());
@@ -50,6 +50,6 @@ public class CategoriesServiceImpl implements CategoriesService {
 
     @Override
     public List<CategoryDto> getCategories() {
-        return this.categories;
+        return categories;
     }
 }

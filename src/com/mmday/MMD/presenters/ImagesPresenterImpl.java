@@ -9,15 +9,15 @@ public class ImagesPresenterImpl implements ImagesPresenter, OnFinishedListener 
     private ImagesView view;
     private ImagesInteractor interactor;
 
-    public ImagesPresenterImpl(ImagesView view, String categoryId) {
-        this.view = view;
-        this.interactor = new ImagesInteractorImpl(this);
-        this.categoryId = categoryId;
+    public ImagesPresenterImpl(ImagesView imagesView, String category) {
+        view = imagesView;
+        categoryId = category;
+        interactor = new ImagesInteractorImpl(this);
     }
 
     @Override
     public void load() {
-        this.interactor.load(categoryId);
+        interactor.load(categoryId);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class ImagesPresenterImpl implements ImagesPresenter, OnFinishedListener 
 
     @Override
     public void onSuccess() {
-        this.view.updateImages(this.interactor.getImages());
+        view.updateImages(this.interactor.getImages());
     }
 }

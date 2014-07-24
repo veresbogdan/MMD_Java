@@ -31,10 +31,10 @@ public class MainActivity extends Activity implements MainView, CategoryClickHan
         setAuthToken();
 
         setContentView(R.layout.main);
-        this.arcMenu = (ArcMenu) findViewById(R.id.arc_menu);
+        arcMenu = (ArcMenu) findViewById(R.id.arc_menu);
 
-        this.presenter = new CategoriesPresenterImpl(this);
-        this.presenter.load();
+        presenter = new CategoriesPresenterImpl(this);
+        presenter.load();
     }
 
     private void setAuthToken() {
@@ -56,12 +56,12 @@ public class MainActivity extends Activity implements MainView, CategoryClickHan
 
     @Override
     public void showProgress() {
-        this.arcMenu.setVisibility(View.INVISIBLE);
+        arcMenu.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        this.arcMenu.setVisibility(View.VISIBLE);
+        arcMenu.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MainActivity extends Activity implements MainView, CategoryClickHan
         item.setScaleX(scale);
         item.setScaleY(scale);
 
-        this.arcMenu.addItem(item, new CategoryClickListener(categoryDto, this));
+        arcMenu.addItem(item, new CategoryClickListener(categoryDto, this));
     }
 
     @Override

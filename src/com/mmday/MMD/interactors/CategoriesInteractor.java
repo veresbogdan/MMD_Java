@@ -4,11 +4,8 @@ import com.mmday.MMD.models.CategoryDto;
 
 import java.util.List;
 
-/**
- * Created by albert on 20.07.2014.
- */
 public interface CategoriesInteractor {
-    void load();
+    public void load();
 
-    List<CategoryDto> getCategories();
+    public List<CategoryDto> getCategories();
 }
