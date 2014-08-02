@@ -1,5 +1,6 @@
 package com.mmday.MMD.interactors;
 
+import com.mmday.MMD.models.UserDto;
 import com.mmday.MMD.presenters.OnLoginFinishedListener;
 import com.mmday.MMD.presenters.OnSignUpFinishedListener;
 
@@ -9,5 +10,5 @@ public interface LoginInteractor {
 
     public String signUpWithCredentials(String username, String password, String email, String location ,OnSignUpFinishedListener listener);
 
-    public String loginWithFacebook(String fbToken, String fbUserId);
+    public UserDto loginWithFacebook(String fbToken, String fbUserId);
 }

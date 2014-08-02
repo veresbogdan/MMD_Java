@@ -62,7 +62,7 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
-    public String loginWithFacebook(String fbToken, String fbUserId) {
-        return loginService.loginWithFacebook(fbToken, fbUserId).getToken();
+    public UserDto loginWithFacebook(String fbToken, String fbUserId) {
+        return loginService.loginWithFacebook(fbToken, fbUserId);
     }
 }
